@@ -14,7 +14,9 @@ function App() {
     if(location.hash) return;
     if(isRefreshed) {
       localStorage.removeItem(key)
-      location.href = `https://oauth.telegram.org/auth?bot_id=7076502228&origin=${origin}&request_access=write&return_to=${origin}`
+      setTimeout(() => {
+        location.href = `https://oauth.telegram.org/auth?bot_id=7076502228&origin=${origin}&request_access=write&return_to=${origin}`
+      }, 5000);
     }else {
        //先进行一次页面重载，防止tg oauth 关闭标签页
        localStorage.setItem(key,"true")
