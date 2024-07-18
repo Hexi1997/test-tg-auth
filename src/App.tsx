@@ -8,8 +8,9 @@ function App() {
 
   useEffect(()=>{
     const origin = encodeURIComponent(location.origin)
+    if(location.hash) return;
     setTimeout(() => {
-      location.href = `https://oauth.telegram.org/auth?bot_id=6343962972&origin=${origin}&request_access=write&return_to=${origin}`
+        location.href = `https://oauth.telegram.org/auth?bot_id=7076502228&origin=${origin}&request_access=write&return_to=${origin}`
     }, 2000);
   },[])
 
