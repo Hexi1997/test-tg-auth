@@ -3,15 +3,23 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const key = 'auth-is-refreshed';
 function App() {
   const [count, setCount] = useState(0);
 
   useEffect(()=>{
     const origin = encodeURIComponent(location.origin)
+    const isRefreshed = !!localStorage.getItem(key);
+    console.log('isRefreshed',isRefreshed);
     if(location.hash) return;
-    setTimeout(() => {
-        location.href = `https://oauth.telegram.org/auth?bot_id=7076502228&origin=${origin}&request_access=write&return_to=${origin}`
-    }, 2000);
+    if(isRefreshed) {
+      localStorage.removeItem(key)
+      location.href = `https://oauth.telegram.org/auth?bot_id=7076502228&origin=${origin}&request_access=write&return_to=${origin}`
+    }else {
+       //先进行一次页面重载，防止tg oauth 关闭标签页
+       localStorage.setItem(key,"true")
+       location.reload();
+    }
   },[])
 
   return (
